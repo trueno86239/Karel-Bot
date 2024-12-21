@@ -24,7 +24,7 @@
    
    Příkaz **RESET** vymaže celou mřížku a vrátí Karla zpět na výchozí pozici (levý horní roh mřížky).
 <br>
-
+<br>
 
 Všechny příkazy jsou **case-insensitive**.
 
