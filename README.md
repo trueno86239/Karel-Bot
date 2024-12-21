@@ -1,6 +1,6 @@
 # Karel-Bot
 
-Karel je virtuální robot vytvořen pomocí PHP a také JS, který se pohybuje po mřížce 10x10 buněk a vykonává příkazy zadané uživatelem.\
+Karel je virtuální robot vytvořen pomocí PHP a také JS, který se pohybuje po mřížce 10x10 buněk a vykonává příkazy zadané uživatelem.
 
 
 1. Pohyb po mřížce:
@@ -20,6 +20,7 @@ Karel je virtuální robot vytvořen pomocí PHP a také JS, který se pohybuje 
 
 
 7. Resetování:
+   
    Příkaz RESET vymaže celou mřížku a vrátí Karla zpět na výchozí pozici (levý horní roh mřížky).
 
 
