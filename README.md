@@ -1,6 +1,6 @@
 # Karel-Bot
 
-**Karel** je virtuální robot vytvořen pomocí PHP a také JS, který se pohybuje po mřížce 10x10 buněk a vykonává příkazy zadané uživatelem.
+**Karel** je virtuální robot, vytvořen pomocí PHP a nebo také JS, který se pohybuje po mřížce 10x10 buněk a vykonává příkazy zadané uživatelem.
 <br>
 <br>
 
@@ -28,5 +28,3 @@
 <br>
 
 Všechny příkazy jsou **case-insensitive**.
-
-    
