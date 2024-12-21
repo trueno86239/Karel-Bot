@@ -2,6 +2,7 @@
 
 **Karel** je virtuální robot vytvořen pomocí PHP a také JS, který se pohybuje po mřížce 10x10 buněk a vykonává příkazy zadané uživatelem.
 <br>
+<br>
 
 
 **1. Pohyb po mřížce:**
