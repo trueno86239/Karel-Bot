@@ -22,6 +22,7 @@ Karel je virtuální robot vytvořen pomocí PHP a také JS, který se pohybuje 
 7. Resetování:
    
    Příkaz RESET vymaže celou mřížku a vrátí Karla zpět na výchozí pozici (levý horní roh mřížky).
+<br>
 
 
 Všechny příkazy jsou case-insensitive.
