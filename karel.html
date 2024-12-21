@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robot Karel v JavaScriptu</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f7df1e;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+        h1 {
+            font-size: 2em;
+            margin: 0;
+            padding: 20px;
+        }
+        textarea {
+            width: 30%;
+            height: 200px;
+            margin: 20px 0;
+            padding: 10px;
+            font-size: 1.2em;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            box-sizing: border-box;
+            background-color: #fff;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 1.2em;
+            margin: 10px 5px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            background-color: #000000;
+            color: #f7df1e;
+        }
+        button:hover {
+            background-color: #f7df1e;
+            color: #000000;
+        }
+
+        table {
+            border-collapse: collapse;
+            margin: 20px auto;
+        }
+        td {
+            width: 40px;
+            height: 40px;
+            text-align: center;
+            vertical-align: middle;
+            border: 1px solid #ddd;
+            background-color: #fff;
+        }
+        td.karel {
+            background-color: #dedede;
+        }
+    </style>
+</head>
+<body>
+    <h1>Robot Karel v JavaScriptu</h1>
+
+    <textarea id="commands" placeholder="Zadejte příkazy, každý na nový řádek (např. krok 5, vlevobok, poloz A, reset)"></textarea><br>
+
+    <button onclick="executeCommands()">Spustit</button>
+
+    <table id="grid"></table>
+
+    <script>
+
+        const gridSize = 10;
+        let grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(''));
+        let karel = { x: 0, y: 0, dir: 'e' };
+
+        function renderGrid() {
+            const table = document.getElementById('grid');
+            table.innerHTML = '';
+            for (let y = 0; y < gridSize; y++) {
+                const row = document.createElement('tr');
+                for (let x = 0; x < gridSize; x++) {
+                    const cell = document.createElement('td');
+                    if (karel.x === x && karel.y === y) {
+                        cell.classList.add('karel');
+                    } else if (grid[y][x] !== '') {
+                        cell.textContent = grid[y][x];
+                    }
+                    row.appendChild(cell);
+                }
+                table.appendChild(row);
+            }
+        }
+
+        function executeCommands() {
+            const commands = document.getElementById('commands').value.trim().split(/\r?\n/);
+            for (let command of commands) {
+                processCommand(command.trim().toLowerCase());
+            }
+            renderGrid();
+        }
+
+        function processCommand(command) {
+            const match = command.match(/^(krok|vlevobok|poloz|reset)(?:\s+(.+))?$/);
+            if (!match) return;
+
+            const action = match[1];
+            const argument = match[2];
+
+            if (action === 'krok') {
+                const steps = argument ? parseInt(argument, 10) : 1;
+                moveKarel(steps);
+            } else if (action === 'vlevobok') {
+                const turns = argument ? parseInt(argument, 10) : 1;
+                turnLeft(turns);
+            } else if (action === 'poloz') {
+                placeMarker(argument || '');
+            } else if (action === 'reset') {
+                resetGrid();
+            }
+        }
+
+        function moveKarel(steps) {
+            for (let i = 0; i < steps; i++) {
+                if (karel.dir === 'n' && karel.y > 0) karel.y--;
+                if (karel.dir === 's' && karel.y < gridSize - 1) karel.y++;
+                if (karel.dir === 'e' && karel.x < gridSize - 1) karel.x++;
+                if (karel.dir === 'w' && karel.x > 0) karel.x--;
+            }
+        }
+
+        function turnLeft(turns) {
+            const directions = ['n', 'w', 's', 'e'];
+            for (let i = 0; i < turns; i++) {
+                const currentIndex = directions.indexOf(karel.dir);
+                karel.dir = directions[(currentIndex + 1) % 4];
+            }
+        }
+
+        function placeMarker(marker) {
+            grid[karel.y][karel.x] = marker.toUpperCase();
+        }
+
+        function resetGrid() {
+            grid = Array.from({ length: gridSize }, () => Array(gridSize).fill(''));
+            karel = { x: 0, y: 0, dir: 'e' }
+        }
+
+        renderGrid();
+    </script>
+</body>
+</html>
